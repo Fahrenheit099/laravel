@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\ToDoController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +25,10 @@ Route::controller(AuthenticateController::class)->group(function () {
         return view('auth.reg');
     })->name('reg_form');
     Route::post('/registration', 'store')->name('reg_user');
+    Route::get('/logout', function(){
+        Auth::logout();
+        return redirect('/auht');
+    })->name('logout');
 });
+
+Route::resource('todolist', ToDoController::class)->middleware('auth');
