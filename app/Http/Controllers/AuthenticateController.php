@@ -25,7 +25,7 @@ class AuthenticateController extends Controller
             return redirect()->intended('/todolist');
         }
 
-        return redirect()->route('auth_index')->withErrors('Invalid user email or password.');
+        return redirect()->route('auth_index')->withErrors('Invalid user email or password.')->withInput($request->except('password'));
     }
 
     public function store(RegFormRequest $request)
@@ -44,8 +44,7 @@ class AuthenticateController extends Controller
                 'password' => $data['password'],
             ], false);
 
-            app('redirect')->setIntendedUrl('/todolist');
-            return redirect()->intended('/');
+            return redirect()->route('todolist.index');
         }
 
         return redirect()->route('reg_form')->withErrors('Invalid user registration.');
