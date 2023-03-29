@@ -34,5 +34,5 @@ Route::controller(AuthenticateController::class)->group(function () {
 Route::resource('todolist', ToDoController::class)->middleware('auth');
 
 Route::get('/', function (){
-    return redirect(route('todolist.index'));
+    return redirect()->route('todolist.index');
 });
